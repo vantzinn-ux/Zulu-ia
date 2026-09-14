@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#0b0d12">
+  <title>Zulu — V&D Digital</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main>
+    <header>
+      <div class="brand">
+        <div class="logo">Z</div>
+        <div><strong>Zulu</strong><small>V&D Digital</small></div>
+      </div>
+      <button id="memoryBtn">Memória</button>
+    </header>
+
+    <section id="status">Conectando...</section>
+    <section id="chat"></section>
+
+    <form id="form">
+      <textarea id="message" rows="1" maxlength="4000" placeholder="Mensagem para Zulu..."></textarea>
+      <button id="send" type="submit">➤</button>
+    </form>
+  </main>
+
+  <dialog id="memoryDialog">
+    <h2>Memória da Zulu</h2>
+    <div id="memoryList"></div>
+    <div class="actions">
+      <button id="clearMemory" class="danger">Limpar</button>
+      <button id="closeMemory">Fechar</button>
+    </div>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>
