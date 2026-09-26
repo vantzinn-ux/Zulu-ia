@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#121316">
+<meta name="color-scheme" content="dark light">
+<title>Zulu</title>
+<link rel="stylesheet" href="style.css">
+
+</head>
+<body data-theme="dark">
+
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+<section id="authView" class="authView">
+  <div class="authCard">
+<div class="authEyebrow">SEU ESPAÇO DE CRIAÇÃO</div>
+    <h1>Boas ideias<br>começam aqui.</h1>
+    <p class="authSubtitle">Entre para escrever, programar e ir além.</p>
+
+    <div id="authTabs" class="authTabs">
+      <button data-tab="login" class="active">Entrar</button>
+      <button data-tab="signup">Criar conta</button>
+    </div>
+
+    <div id="loginPane" class="authPane active">
+      <label for="loginEmail">E-mail</label>
+      <input id="loginEmail" type="email" autocomplete="email" placeholder="voce@email.com">
+      <label>Senha</label>
+      <div class="passwordWrap">
+        <input id="loginPassword" type="password" autocomplete="current-password" placeholder="Sua senha">
+        <button class="eyeBtn" data-eye="loginPassword" type="button">◉</button>
+      </div>
+      <button id="loginBtn" class="primaryBtn">Entrar</button>
+      <button id="forgotBtn" class="linkBtn">Esqueci minha senha</button>
+    </div>
+
+    <div id="signupPane" class="authPane">
+      <label for="signupEmail">E-mail</label>
+      <input id="signupEmail" type="email" autocomplete="email" placeholder="voce@email.com">
+      <label>Senha</label>
+      <div class="passwordWrap">
+        <input id="signupPassword" type="password" autocomplete="new-password" placeholder="Mínimo 8 caracteres">
+        <button class="eyeBtn" data-eye="signupPassword" type="button">◉</button>
+      </div>
+      <div class="passwordHint">Use maiúscula, minúscula, número e símbolo.</div>
+      <button id="signupBtn" class="primaryBtn">Criar conta</button>
+    </div>
+
+    <div class="divider"><span>ou</span></div>
+
+    <button id="googleBtn" class="socialBtn">
+      <span class="googleDot">G</span> Continuar com Google
+    </button>
+    <button id="facebookBtn" class="socialBtn">
+      <span class="facebookDot">f</span> Continuar com Facebook
+    </button>
+  </div>
+</section>
+
+<section id="otpView" class="modalScreen" role="dialog" aria-modal="true">
+  <div class="miniCard">
+    <h2 id="otpTitle">Confirme seu e-mail</h2>
+    <p id="otpText">Digite o código enviado para seu e-mail.</p>
+    <input id="otpCode" class="otpInput" inputmode="numeric" maxlength="8" placeholder="00000000">
+    <button id="otpConfirmBtn" class="primaryBtn">Confirmar código</button>
+    <button id="otpBackBtn" class="linkBtn">Voltar</button>
+  </div>
+</section>
+
+<section id="newPasswordView" class="modalScreen" role="dialog" aria-modal="true">
+  <div class="miniCard">
+    <h2>Crie uma nova senha 🔐</h2>
+    <p>Depois da verificação, escolha uma nova senha para sua conta.</p>
+    <input id="newPassword" type="password" placeholder="Nova senha">
+    <input id="newPassword2" type="password" placeholder="Confirmar nova senha">
+    <button id="savePasswordBtn" class="primaryBtn">Alterar senha</button>
+  </div>
+</section>
+
+<div id="overlay" class="overlay"></div>
+
+<aside id="drawer" class="drawer" aria-label="Menu de conversas" inert>
+  <div class="drawerTop">
+    <div class="brand"><img src="zulu-avatar.png" alt="Foto da Zulu"><div><strong>Zulu<span class="versionTag">5</span></strong><span>Ideias em movimento</span></div></div>
+    <button id="closeDrawer" class="iconBtn mobileOnly" aria-label="Fechar menu" data-icon="close"></button>
+  </div>
+  <button id="newChatBtn" class="newChat"><span data-icon="plus"></span> Nova conversa <kbd>⌘ K</kbd></button>
+  <label class="searchBox"><span data-icon="search"></span><input id="chatSearch" placeholder="Buscar conversas" aria-label="Buscar conversas"></label>
+  <div class="drawerSection"><div class="sectionTitle">SUAS CONVERSAS <span id="chatCount">0</span></div><div id="chatList" class="chatList"></div></div>
+  <div class="drawerBottom">
+    <button id="memoryBtn" class="menuRow"><span data-icon="memory"></span> Memória</button>
+    <button id="settingsBtn" class="menuRow"><span data-icon="settings"></span> Configurações</button>
+    <div class="accountCard"><span id="accountInitial">U</span><div><strong id="accountName">Sua conta</strong><small>Seu espaço pessoal</small></div><span class="onlineDot"></span></div>
+  </div>
+</aside>
+
+<main id="appView" class="shell hidden">
+  <header class="topbar">
+    <button id="menuBtn" class="iconBtn mobileOnly" aria-label="Abrir conversas" data-icon="sidebar"></button>
+    <div class="titleWrap"><span data-icon="chat"></span><span id="chatHeading">Nova conversa</span></div>
+    <div class="topActions"><span id="status" class="status">Pronta para ajudar</span><button id="exportChatBtn" class="iconBtn" title="Exportar conversa" aria-label="Exportar conversa" data-icon="download"></button><button id="newTopBtn" class="iconBtn" title="Nova conversa" aria-label="Nova conversa" data-icon="edit"></button></div>
+  </header>
+  <div class="conversationArea">
+    <section id="messages" class="messages" aria-label="Mensagens da conversa" tabindex="0"></section>
+    <button id="scrollBottom" class="scrollBottom hidden" aria-label="Ir para a mensagem mais recente" data-icon="down"></button>
+  </div>
+  <div class="composerWrap">
+    <form id="composer" class="composer">
+      <div id="attachmentTray" class="attachmentTray" aria-label="Arquivos anexados"></div>
+      <label for="input" class="srOnly">Sua mensagem</label>
+      <textarea id="input" rows="1" maxlength="60000" placeholder="Pergunte, crie ou traga uma ideia..."></textarea>
+      <div class="composerTools">
+        <div class="composerLeft"><button id="attachBtn" type="button" class="iconBtn" title="Anexar arquivos" aria-label="Anexar arquivos" data-icon="plus"></button><span class="toolDivider"></span><span class="composerLabel">Texto, código e imagens</span></div>
+        <div class="composerRight"><span id="charCount" class="charCount"></span><button id="stopBtn" type="button" class="stopBtn hidden" title="Interromper resposta" aria-label="Interromper resposta" data-icon="stop"></button><button id="sendBtn" type="submit" class="sendBtn" aria-label="Enviar mensagem" data-icon="up"></button></div>
+      </div>
+      <input id="fileInput" type="file" multiple hidden accept=".png,.jpg,.jpeg,.webp,.pdf,.docx,.zip,.txt,.md,.js,.mjs,.cjs,.jsx,.ts,.tsx,.json,.html,.css,.scss,.py,.lua,.sql,.xml,.yaml,.yml,.csv,.tsv,.toml,.ini,.log,.sh,.bat,.cmd,.ps1,.ahk,.c,.h,.cpp,.cs,.java,.kt,.go,.rs,.rb,.php,.swift,.vue,.svelte,.r,.env,.gitignore">
+    </form>
+    <div class="hint"><span>Uma ideia de cada vez. Confira informações importantes.</span><span class="keyboardHint">Enter para enviar · Shift + Enter para pular linha</span></div>
+  </div>
+  <div id="dropHint" class="dropHint hidden"><span data-icon="upload"></span><strong>Solte seus arquivos aqui</strong><span>Até 6 arquivos · 5 MB por arquivo · 10 MB no total</span></div>
+</main>
+
+<section id="memoryPanel" class="sheet" role="dialog" aria-modal="true">
+  <div class="sheetHead">
+    <div><h2>Memória</h2><p>Preferências que ajudam a personalizar suas conversas.</p></div>
+    <button id="closeMemory" class="iconBtn">×</button>
+  </div>
+  <div id="memoryList" class="memoryList"></div>
+</section>
+
+<section id="settingsPanel" class="sheet" role="dialog" aria-modal="true">
+  <div class="sheetHead">
+    <div><h2>Configurações</h2><p>Deixe este espaço com a sua cara.</p></div>
+    <button id="closeSettings" class="iconBtn">×</button>
+  </div>
+
+  <div class="settingsBody">
+    <div class="settingsGroup">
+      <h3>Aparência</h3>
+      <div class="settingRow">
+        <div><b>Tema</b><small>Claro ou escuro</small></div>
+        <label class="switch">
+          <input id="themeToggle" type="checkbox">
+          <span class="slider"></span>
+        </label>
+      </div>
+    </div>
+
+    <div class="settingsGroup">
+      <h3>Perfil</h3>
+      <label>Como você quer ser chamado</label>
+      <div class="inlineForm">
+        <input id="settingsName" maxlength="60" placeholder="Nome ou apelido">
+        <button id="saveNameSettings" class="smallBtn">Salvar</button>
+      </div>
+      <div id="accountEmail" class="accountMeta"></div>
+      <div id="accountProvider" class="accountMeta"></div>
+    </div>
+
+    <div class="settingsGroup">
+      <h3>Segurança da conta</h3>
+      <button id="changePasswordBtn" class="settingsAction">🔐 Alterar senha</button>
+    </div>
+
+    <div class="settingsGroup">
+      <button id="logoutBtn" class="dangerBtn">Sair da conta</button>
+    </div>
+  </div>
+</section>
+
+<section id="nameModal" class="modalScreen" role="dialog" aria-modal="true">
+  <div class="miniCard">
+    <h2>Como podemos te chamar?</h2>
+    <p>Escolha um nome ou apelido para suas conversas.</p>
+    <input id="nameInput" maxlength="60" placeholder="Seu nome ou apelido">
+    <button id="saveNameBtn" class="primaryBtn">Continuar</button>
+  </div>
+</section>
+
+<script src="/vendor/supabase.js" defer></script>
+<script src="/vendor/marked.js" defer></script>
+<script src="/vendor/purify.js" defer></script>
+<script src="/vendor/highlight.js" defer></script>
+<script src="/vendor/fflate.js" defer></script>
+<script src="app.js" defer></script>
+<script src="chat-ui.js" defer></script>
+</body>
+</html>
